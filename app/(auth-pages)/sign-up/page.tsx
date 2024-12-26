@@ -3,6 +3,8 @@ import { FormMessage, Message } from "@/components/form-message";
 import { SubmitButton } from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { AuthDivider } from "@/components/auth/auth-divider";
+import { GoogleSignIn } from "@/components/auth/google-sign-in";
 import Link from "next/link";
 import { SmtpMessage } from "../smtp-message";
 
@@ -10,7 +12,7 @@ export default async function Signup(props: {
   searchParams: Promise<Message>;
 }) {
   const searchParams = await props.searchParams;
-  if ("message" in searchParams) {
+  if (searchParams && "message" in searchParams) {
     return (
       <div className="w-full flex-1 flex items-center h-screen sm:max-w-md justify-center gap-2 p-4">
         <FormMessage message={searchParams} />
@@ -44,6 +46,10 @@ export default async function Signup(props: {
           </SubmitButton>
           <FormMessage message={searchParams} />
         </div>
+        <AuthDivider />
+      <div className="mt-4 flex justify-center">
+        <GoogleSignIn />
+      </div>
       </form>
       <SmtpMessage />
     </>
